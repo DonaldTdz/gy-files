@@ -1,0 +1,8 @@
+{
+  "usingComponents":{
+    "card":"../../../mini-ddui/es/card/index",
+    "search-bar":"../../../mini-ddui/es/search-bar/index",
+    "tabs":"../../../mini-ddui/es/tabs/index",
+    "tab-content": "../../../mini-ddui/es/tabs/tab-content/index"
+  }
+}

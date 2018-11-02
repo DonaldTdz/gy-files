@@ -1,0 +1,7 @@
+{
+  "usingComponents":{
+    "grid":"../../mini-ddui/es/grid/index",
+    "search-bar":"../../mini-ddui/es/search-bar/index",
+    "card":"../../mini-ddui/es/card/index"
+  }
+}

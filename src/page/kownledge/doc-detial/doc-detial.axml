@@ -1,0 +1,51 @@
+<view class="item ddcenter page-margin page-padding" a:if="{{!hasPermission}}">
+  <image style="width: 80px; height:80px;" mode="aspectFit" src="../../../image/permission.png" />
+  <text style="color:gray; margin-top:10px;">没有权限</text>
+</view>
+<view class="item ddcenter page-margin page-padding" a:if="{{hasPermission&&!docInfo}}">
+  <image style="width: 80px; height:80px;" mode="aspectFit" src="../../../image/nodata-search.png" />
+  <text style="color:gray; margin-top:10px;">没有数据</text>
+</view>
+<view a:if="{{hasPermission&&docInfo}}" class="page-margin">
+  <list>
+    <view slot="header">资料信息</view>
+    <list-item disabled="{{true}}">
+      <view class="fsize14">资料名称</view>
+      <view class="fsize14" slot="extra">{{docInfo.name}}</view>
+    </list-item >
+    <list-item disabled="{{true}}">
+      <view class="fsize14" style="float:left;width:20%;">类别</view>
+      <view class="fsize14" style="color:#888; text-align:right; float:right;width:80%;">{{docInfo.categoryDesc}}</view>
+    </list-item>
+    <list-item last="{{true}}" disabled="{{true}}">
+      <view class="fsize14">发布日期</view>
+      <view class="fsize14" slot="extra">{{docInfo.timeFormat}}</view>
+    </list-item>
+  </list>
+</view>
+<view a:if="{{hasPermission&&docInfo.summary}}" class="page-margin page-section">
+  <list>
+    <view slot="header">资料摘要</view>
+    <list-item last="{{true}}" disabled="{{true}}" wrap="{{true}}" multipleLine="{{true}}">      {{docInfo.summary}}    </list-item>
+  </list>
+</view>
+<view a:if="{{hasPermission&&docInfo.content}}" class="page-margin page-section">
+  <list>
+    <view slot="header">资料内容</view>
+    <list-item last="{{true}}" disabled="{{true}}" wrap="{{true}}" multipleLine="{{true}}">      {{docInfo.content}}    </list-item>
+  </list>
+</view>
+<!-- <view a:if="{{docInfo.fileList.length>0}}" class="page-margin page-section"><list><view slot="header">资料附件</view><list-item last="{{true}}" disabled="{{true}}"><grid style="margin-left:0px;" onGridItemClick="onItemClick" columnNum="{{5}}" list="{{docInfo.fileList}}" /></list-item></list></view> -->
+<view a:if="{{hasPermission&&docInfo.fileList.length>0}}" class="page-margin page-section">
+  <list>
+    <view slot="header">资料附件</view>
+    <block a:for="{{docInfo.fileList}}">
+      <list-item key="item-{{index}}" index="{{index}}" last="{{index === (docInfo.fileList.length - 1)}}" onClick="onItemClick">
+        <view class="fsize14">{{item.text}}</view>
+        <view slot="extra">下载                
+          <image class="row-arrow" src="/image/annex.png" mode="aspectFill" />
+        </view>
+      </list-item>
+    </block>
+  </list>
+</view>

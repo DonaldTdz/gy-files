@@ -1,0 +1,17 @@
+  <view>
+    <card thumb="{{userInfo.avatar}}" arrow={{false}} title="{{userInfo.name}}" subTitle="{{userInfo.position}}" />
+  </view>
+<view class="page-margin">
+  <search-bar
+    value="{{value}}"
+    placeholder="关键字1"
+    onFocus="handleFocus"
+    />
+</view>
+<view style="margin-top:15px;">
+<grid onGridItemClick="onItemClick" columnNum="{{3}}" list="{{gridList}}" />
+</view>
+<view class="item ddcenter page-margin page-padding" a:if="{{gridList.length == 0}}">
+  <image style="width: 80px; height:80px;" mode="aspectFit" src="../../image/nodata-search.png" />
+  <text style="color:gray; margin-top:10px;">没有数据</text>
+</view>

@@ -1,0 +1,50 @@
+.page-margin{
+  background: #fff;
+  border-radius: 4px;
+  margin: 6px 10px;
+}
+
+.page-padding{
+ padding: 32rpx;
+}
+
+.ddcenter{
+ text-align: center;
+}
+
+.item {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.fsize14{
+  font-size: 14px;
+}
+
+.am-list-content{
+  font-size: 13px;
+}
+
+.row-arrow {
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 16rpx;
+}
+
+.am-grid-item {
+    width: 28%;
+    text-align: center;
+    padding-top: 28%;
+    margin-left: 0px;
+    margin-bottom: 4%;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0.08rem;
+    border-radius: 0.1rem;
+    background-color: white;
+}

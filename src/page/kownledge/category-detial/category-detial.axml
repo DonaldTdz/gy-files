@@ -1,0 +1,39 @@
+<view class="page-margin">
+  <search-bar
+    value="{{value}}"
+    placeholder="关键字"
+    onClear="handleClear"
+    onCancel="handleCancel"
+    onSubmit="handleSubmit"
+    onInput="handleInput"
+    />
+</view>
+<!-- <view>
+  <view a:for="{{docList}}">
+    <card key="item-{{index}}"  index="{{index}}" last="{{index === (docList.length - 1)}}"
+     subTitle="查看详情"
+      title="{{item.name}}" 
+      onClick="onCardClick"
+      arrow ="{{true}}"
+      info="{{item}}" />
+  </view>
+</view> -->
+<view>
+  <tabs a:if="{{id}}"
+    tabs="{{tabs}}"
+    onTabClick="handleTabClick"
+    tabBarUnderlineColor = "{{blue}}">
+  </tabs>
+  <view a:for="{{docList}}">
+    <card key="item-{{index}}"  index="{{index}}" last="{{index === (docList.length - 1)}}"
+     subTitle="{{item.summary}}"
+      title="{{item.name}}" 
+      onClick="onCardClick"
+      arrow ="{{true}}"
+      info="{{item}}" />
+  </view>
+</view>
+<view class="item ddcenter page-margin page-padding" a:if="{{docList.length == 0}}">
+  <image style="width: 80px; height:80px;" mode="aspectFit" src="../../../image/nodata-search.png" />
+  <text style="color:gray; margin-top:10px;">没有数据</text>
+</view>
