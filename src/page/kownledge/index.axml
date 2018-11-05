@@ -4,7 +4,7 @@
 <view class="page-margin">
   <search-bar
     value="{{value}}"
-    placeholder="关键字1"
+    placeholder="资料名称"
     onFocus="handleFocus"
     />
 </view>

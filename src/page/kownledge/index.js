@@ -13,32 +13,37 @@ Page({
     if (app.globalData.userInfo.id == '') {
       dd.showLoading();
       //免登陆
-      //dd.getAuthCode({
-      //success: (res) => {
-      //  console.log('My authCode', res.authCode);
-      dd.httpRequest({
-        url: app.globalData.host + 'api/services/app/Employee/GetDingDingUserByCodeAsync',
-        method: 'Get',
-        data: {
-          code: '',//res.authCode,
-        },
-        dataType: 'json',
+      dd.getAuthCode({
         success: (res) => {
-          app.globalData.userInfo = res.data.result;
-          this.setData({ userInfo: app.globalData.userInfo });
-          this.getCategoryList();
-        },
-        fail: function(res) {
-          dd.alert({ content: '获取用户信息异常' });
-        },
-        complete: function(res) {
-          dd.hideLoading();
+          //console.log('My authCode', res.authCode);
+          //console.log('host url', app.globalData.host + 'api/services/app/Employee/GetDingDingUserByCodeAsync');
+          dd.httpRequest({
+            url: app.globalData.host + 'api/services/app/Employee/GetDingDingUserByCodeAsync',
+            method: 'Get',
+            data: {
+              code: res.authCode,
+              appId: 10
+            },
+            dataType: 'json',
+            success: (res) => {
+              app.globalData.userInfo = res.data.result;
+              this.setData({ userInfo: app.globalData.userInfo });
+              this.getCategoryList();
+            },
+            fail: function(res) {
+              dd.alert({ content: '获取用户信息异常' + JSON.stringify(res), buttonText: '确定'  });
+            },
+            complete: function(res) {
+              dd.hideLoading();
+            }
+          });
         }
       });
     } else {
       this.setData({ userInfo: app.globalData.userInfo });
       this.getCategoryList();
     }
+
   },
 
   handleFocus() {

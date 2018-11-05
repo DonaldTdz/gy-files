@@ -1,7 +1,7 @@
 <view class="page-margin">
   <search-bar
     value="{{value}}"
-    placeholder="关键字"
+    placeholder="资料名称"
     onClear="handleClear"
     onCancel="handleCancel"
     onSubmit="handleSubmit"

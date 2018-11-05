@@ -1,8 +1,9 @@
 App({
   globalData: {
     userInfo: { id: '', name: '', position: '', avatar: '' },
-    host: 'http://yangfan.vaiwan.com/',
-    // host: 'http://127.0.0.1:21021/',
+    host: 'http://gyapi.intcov.com/',
+    //host: 'http://yangfan.vaiwan.com/',
+    //host: 'http://127.0.0.1:21021/',
     corpId: ''
   },
   onLaunch(options) {

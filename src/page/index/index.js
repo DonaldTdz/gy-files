@@ -4,7 +4,7 @@ let app = getApp();
 //内网穿透工具介绍:
 // https://open-doc.dingtalk.com/microapp/debug/ucof2g
 //替换成开发者后台设置的安全域名
-let url = 'http://hechuangdd.vaiwan.com/';
+//let url = 'http://hechuangdd.vaiwan.com/';
 
 Page({
     data:{
@@ -23,7 +23,7 @@ Page({
                 })
                 //dd.alert({content: "step1"});
                 dd.httpRequest({
-                  url: url + 'api/services/app/Employee/GetDingDingUserByCodeAsync',
+                  url: app.globalData.host + 'api/services/app/Employee/GetDingDingUserByCodeAsync',
                     method: 'GET',
                     data: {
                       code: res.authCode

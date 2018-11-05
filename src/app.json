@@ -5,7 +5,8 @@
             "page/kownledge/doc-detial/doc-detial"
   ],
   "window": {
-    "defaultTitle": "标准化资料库",
+    "defaultTitle": "资料库",
     "backgroundColor": "#F5F5F9"
-  }
+  },
+  "debug": false
 }
