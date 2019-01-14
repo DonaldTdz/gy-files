@@ -10,6 +10,7 @@ Page({
         pageSearchIndex: 1,
         tempTabIndex: 0,
         pullType: '',
+      color:'#3296fa',
     },
 
     onLoad(query) {
