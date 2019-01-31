@@ -26,7 +26,8 @@ Page({
                   url: app.globalData.host + 'api/services/app/Employee/GetDingDingUserByCodeAsync',
                     method: 'GET',
                     data: {
-                      code: res.authCode
+                      code: res.authCode,
+                      appId: 10
                     },
                     dataType: 'json',
                     success: (res) => {
