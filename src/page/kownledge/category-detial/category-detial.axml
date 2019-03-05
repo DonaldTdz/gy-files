@@ -22,7 +22,7 @@
   <tabs a:if="{{id}}"
     tabs="{{tabs}}"
     onTabClick="handleTabClick"
-    tabBarUnderlineColor = "{{blue}}">
+    tabBarUnderlineColor = "{{bule}}">
   </tabs>
   <view a:for="{{docList}}">
     <card key="item-{{index}}"  index="{{index}}" last="{{index === (docList.length - 1)}}"
