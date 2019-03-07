@@ -1,0 +1,6 @@
+{
+  "usingComponents":{
+    "list":"../../mini-ddui/es/list/index",
+    "list-item":"../../mini-ddui/es/list/list-item/index"
+  }
+}

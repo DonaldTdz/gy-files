@@ -5,7 +5,12 @@ Page({
     docInfo: {},
     hasPermission: false
   },
-
+    input: {
+    documentId: null,
+    employeeId: null,
+    content: '',
+    employeeName: null
+  },
   onLoad(query) {
     if (query.id) {
       this.setData({ id: query.id });
@@ -86,6 +91,35 @@ Page({
     })
   },
 
+  bindFormSubmit: function(e) {
+    if(e.detail.value.textarea.replace(/(^s*)|(s*$)/g, "").length !=0){
+    this.input.content= e.detail.value.textarea;
+    this.input.documentId= this.data.id;
+    this.input.employeeId = app.globalData.userInfo.id;
+    this.input.employeeName = app.globalData.userInfo.name;
+    var jsonData = JSON.stringify(this.input);
+    dd.httpRequest({
+      url: app.globalData.host + 'api/services/app/Advise/CreateAdviseAsync',
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=UTF-8', "Accept": 'application/json' },
+
+      data: jsonData,
+  dataType: 'json',
+  success: function(res) {
+      dd.hideLoading();
+      dd.alert({ content: '意见反馈成功', buttonText: '确定' });
+      e.detail.value.textarea ='';
+  },
+  fail: function(res) {
+       dd.hideLoading();
+        dd.alert({ content: '提交数据异常', buttonText: '确定' });
+        console.info(res); 
+         },
+});
+    }else{
+        dd.alert({ content: '内容不能为空', buttonText: '确定' });
+    }
+  },
   onShareAppMessage() {
     // 返回自定义分享信息
   },
