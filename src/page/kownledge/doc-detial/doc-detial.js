@@ -45,7 +45,8 @@ Page({
       dataType: 'json',
       data: {
         id: this.data.id,
-        host: app.globalData.host
+        host: app.globalData.host,
+        uid: app.globalData.userInfo.id
       },
       success: (res) => {
         this.setData({ docInfo: res.data.result });
@@ -58,32 +59,128 @@ Page({
       }
     });
   },
+  getCurrentFile(id) {
+    let res = dd.getStorageSync({ key: 'doc_user_files' });
+    let files = res.data;
+    if (!files || files.length == 0) {
+      return null;
+    }
 
+    for (var i in files) {
+      if (files[i].id == id) {
+        return files[i];
+      }
+    }
+    return null;
+  },
+  setFile(file) {
+    /*let res = dd.getStorageSync({ key: 'doc_user_files' });
+    let files = res.data;
+    if (!files) {
+      files = [];
+    }
+    files.push(file);
+    dd.setStorageSync({
+      key: 'doc_user_files',
+      data: files
+    });*/
+    dd.showLoading();
+    var jsonData = JSON.stringify(file);
+    dd.httpRequest({
+      url: app.globalData.host + 'api/services/app/Document/SaveDocDingTalkAsync',
+      method: 'Post',
+      headers: { 'Content-Type': 'application/json;charset=UTF-8', "Accept": 'application/json' },
+      data: jsonData,
+      dataType: 'json',
+      success: (res) => {
+        dd.hideLoading();
+        //console.info(res.data.result);
+        var result = res.data;
+        if (result.success) {
+        
+        } else {
+          dd.alert({ content: result.error.message, buttonText: '确定' });
+        }
+      },
+      fail: function(res) {
+        dd.hideLoading();
+        dd.alert({ content: '提交数据异常', buttonText: '确定' });
+        console.info(res);
+      },
+      complete: function(res) {
+        dd.hideLoading();
+        //dd.alert({ content: 'complete' });
+      }
+    });
+
+  },
   onItemClick: function(ev) {
     const curIndex = ev.index;
-    var curUrl = this.data.docInfo.fileList[curIndex].fileUrl;
-    var curName = this.data.docInfo.fileList[curIndex].text;
-    dd.saveFileToDingTalk({
-      url: curUrl,
-      name: curName,
-      success: res => {
-        // dd.showToast({
-        //   type: 'success',
-        //   duration: 3000,
-        //   success: () => {
-        //   },
-        // });
+    const file = this.data.docInfo.fileList[curIndex];
+    var curUrl = file.fileUrl;
+    var curName = file.text;
+    var curId = file.id;
+    //var file = this.getCurrentFile(curId);
+    //dd.alert({
+    //    content: JSON.stringify(res.data),
+    //});
+    if (file.spaceId) {//如果存在 直接预览
+      dd.previewFileInDingTalk({
+        corpId: app.globalData.corpId,
+        spaceId: file.spaceId,
+        fileId: file.fileId,
+        fileName: file.fileName,
+        fileSize: file.fileSize,
+        fileType: file.fileType,
+        //success: res => {
+        //  dd.alert({ content: JSON.stringify(res), buttonText: '确定' });
+        //},
+        //fail: res => {
+        // dd.alert({ content: JSON.stringify(res), buttonText: '确定' });
+        //}
+      });
+    } else {
+      dd.saveFileToDingTalk({
+        url: curUrl,
+        name: curName,
+        success: res => {
+          // dd.showToast({
+          //   type: 'success',
+          //   duration: 3000,
+          //   success: () => {
+          //   },
+          // });
 
-        dd.previewFileInDingTalk({
-          corpId: app.globalData.corpId,
-          spaceId: res.data[0].spaceId,
-          fileId: res.data[0].fileId,
-          fileName: res.data[0].fileName,
-          fileSize: res.data[0].fileSize,
-          fileType: res.data[0].fileType,
-        })
-      }
-    })
+          var newfile = {
+            docAttId: curId,
+            userId: app.globalData.userInfo.id,
+            spaceId: res.data[0].spaceId,
+            fileId: res.data[0].fileId,
+            fileName: res.data[0].fileName,
+            fileSize: res.data[0].fileSize,
+            fileType: res.data[0].fileType
+          };
+          this.setFile(newfile);//添加
+
+          this.data.docInfo.fileList[curIndex].spaceId = res.data[0].spaceId;
+          this.data.docInfo.fileList[curIndex].fileId = res.data[0].fileId;
+          this.data.docInfo.fileList[curIndex].fileName = res.data[0].fileName;
+          this.data.docInfo.fileList[curIndex].fileSize = res.data[0].fileSize;
+          this.data.docInfo.fileList[curIndex].fileType = res.data[0].fileType;
+
+          dd.previewFileInDingTalk({
+            corpId: app.globalData.corpId,
+            spaceId: res.data[0].spaceId,
+            fileId: res.data[0].fileId,
+            fileName: res.data[0].fileName,
+            fileSize: res.data[0].fileSize,
+            fileType: res.data[0].fileType,
+          });
+
+         
+        }
+      });
+    }
   },
 
   onShareAppMessage() {
