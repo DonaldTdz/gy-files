@@ -16,7 +16,12 @@ Page({
     onLoad(query) {
         this.setData({ docList: [] });
         if (query.id) {
+          if(query.id.indexOf(',') != -1){
+            this.setData({ id: query.id.split(',')[1] });
+            // console.log(this.data.id);
+          }else{
             this.setData({ id: query.id });
+          }
             this.getTabs();
         }
     },

@@ -108,9 +108,15 @@ Component({
       dd.scan({
         type: 'qr',
         success: (res) => {
-          dd.navigateTo({
+          if(res.code.indexOf(',') == -1){
+          dd.navigateTo({           
             url: '/page/kownledge/doc-detial/doc-detial?id=' + res.code,
           }); 
+          }else{
+          dd.navigateTo({           
+            url: '/page/kownledge/category-detial/category-detial?id=' + res.code,
+          }); 
+          }
         },
          fail: function(res) {
         dd.alert({ content: '获取数据失败，请重试' });

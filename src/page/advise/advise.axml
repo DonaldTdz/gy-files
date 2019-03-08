@@ -1,0 +1,23 @@
+<view a:if="{{info}}" class="page-margin">
+  <list>
+    <view slot="header">资料信息</view>
+    <list-item disabled="{{true}}">
+      <view class="fsize14">资料名称</view>
+      <view class="fsize14" slot="extra">{{info.documentName}}</view>
+    </list-item >
+    <list-item disabled="{{true}}">
+      <view class="fsize14" style="float:left;width:20%;">反馈人员</view>
+      <view class="fsize14" style="color:#888; text-align:right; float:right;width:80%;">{{info.employeeName}}</view>
+    </list-item>
+    <list-item last="{{true}}" disabled="{{true}}">
+      <view class="fsize14">反馈时间</view>
+      <view class="fsize14" slot="extra">{{info.timeFormat}}</view>
+    </list-item>
+  </list>
+</view>
+<view a:if="{{info}}" class="page-margin page-section">
+  <list>
+    <view slot="header">反馈内容</view>
+    <list-item last="{{true}}" disabled="{{true}}" wrap="{{true}}" multipleLine="{{true}}">{{info.content}}</list-item>
+  </list>
+</view>

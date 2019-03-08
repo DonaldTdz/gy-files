@@ -2,7 +2,8 @@
   "pages": [
             "page/kownledge/index",
             "page/kownledge/category-detial/category-detial",
-            "page/kownledge/doc-detial/doc-detial"
+            "page/kownledge/doc-detial/doc-detial",
+            "page/advise/advise"
   ],
   "window": {
     "defaultTitle": "企业标准库",
