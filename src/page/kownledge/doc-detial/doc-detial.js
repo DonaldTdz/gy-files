@@ -3,7 +3,8 @@ Page({
   data: {
     id: null,
     docInfo: {},
-    hasPermission: false
+    hasPermission: false,
+    loading:false
   },
     input: {
     documentId: null,
@@ -98,6 +99,7 @@ Page({
     this.input.employeeId = app.globalData.userInfo.id;
     this.input.employeeName = app.globalData.userInfo.name;
     var jsonData = JSON.stringify(this.input);
+    this.setData({loading:true});
     dd.httpRequest({
       url: app.globalData.host + 'api/services/app/Advise/CreateAdviseAsync',
       method: 'POST',
@@ -107,8 +109,17 @@ Page({
   dataType: 'json',
   success: function(res) {
       dd.hideLoading();
-      dd.alert({ content: '意见反馈成功', buttonText: '确定' });
-      e.detail.value.textarea ='';
+      dd.showToast({
+            type: 'success',
+            content: '意见反馈成功',
+            duration: 3000,
+            success: () => {
+            // this.setData({loading:false});
+            dd.navigateBack();
+                         },
+          });
+      // dd.alert({ content: '意见反馈成功', buttonText: '确定' });
+      // e.detail.value.textarea ='';
   },
   fail: function(res) {
        dd.hideLoading();
