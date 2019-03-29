@@ -42,7 +42,7 @@
     <block a:for="{{docInfo.fileList}}">
       <list-item key="item-{{index}}" index="{{index}}" last="{{index === (docInfo.fileList.length - 1)}}" onClick="onItemClick">
         <view class="fsize14">{{item.text}}</view>
-        <view slot="extra">下载                
+        <view slot="extra">预览                
           <image class="row-arrow" src="/image/annex.png" mode="aspectFill" />
         </view>
       </list-item>
